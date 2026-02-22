@@ -5,7 +5,10 @@ import './App.css';
 function App() {
   const [message, setMessage] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
-  const [url, setUrl] = useState('/api');
+  const BASE_URL =
+  process.env.REACT_APP_API_URL || 'http://backend:5000';
+
+const [url] = useState(`${BASE_URL}/api`);
 
   const fetchData = useCallback(() => {
     fetch(url)
