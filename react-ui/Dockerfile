@@ -1,7 +1,16 @@
-FROM node:20-alpine AS build
+FROM node:18-alpine
+
 WORKDIR /app
-COPY pacakge*.json ./
+
+COPY package*.json ./
 RUN npm install
-RUN npm audit fix --force
+
 COPY . .
-RUN npm start
+
+ENV HOST=0.0.0.0
+ENV PORT=3000
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
